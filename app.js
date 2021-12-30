@@ -79,7 +79,7 @@ app.post("/webhook", (req, res) => {
     res.status(200).send("EVENT_RECEIVED");
 
     // Iterate over each entry - there may be multiple if batched
-    body.entry.forEach(async function (entry) {
+    body.entry.forEach(async function (entry) {      
       if ("changes" in entry) {
         // Handle Page Changes event
         let receiveMessage = new Receive();
@@ -119,6 +119,7 @@ app.post("/webhook", (req, res) => {
 
         // Get the sender PSID
         let senderPsid = webhookEvent.sender.id;
+        config.pageId = webhookEvent.recipient.id;
 
         if (!(senderPsid in users)) {
           // First time seeing this user
