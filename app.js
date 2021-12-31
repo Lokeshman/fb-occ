@@ -70,6 +70,8 @@ app.get("/webhook", (req, res) => {
 app.post("/webhook", (req, res) => {
   let body = req.body;
 
+  console.dir(req.query, { depth: null });
+
   console.log(`\u{1F7EA} Received webhook:`);
   console.dir(body, { depth: null });
 
@@ -119,7 +121,6 @@ app.post("/webhook", (req, res) => {
 
         // Get the sender PSID
         let senderPsid = webhookEvent.sender.id;
-        config.pageId = webhookEvent.recipient.id;
 
         if (!(senderPsid in users)) {
           // First time seeing this user
